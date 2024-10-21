@@ -1,10 +1,10 @@
 from pathlib import Path
 import mkdocs_gen_files
 
-# Workaround
+# Workaround - fails without it
 
-# from mkdocs_include_markdown_plugin import IncludeMarkdownPlugin
-# IncludeMarkdownPlugin._update_watched_files = lambda self: None
+from mkdocs_include_markdown_plugin import IncludeMarkdownPlugin
+IncludeMarkdownPlugin._update_watched_files = lambda self: None
 
 # Find directories
 
@@ -15,6 +15,9 @@ docs_dir = repository_dir/"docs"
 print("Repository at", repository_dir)
 
 # Copy files
+
+with mkdocs_gen_files.open("index.md", "w") as virtual:
+    virtual.write((examples_dir/"index.md").read_text())
 
 with mkdocs_gen_files.open("examples/basic.py", "w") as virtual:
     virtual.write((examples_dir/"basic.py").read_text())
