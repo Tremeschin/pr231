@@ -1,0 +1,7 @@
+site_name: Title
+docs_dir: docs
+plugins:
+  - gen-files:
+      scripts:
+        - docs/make.py
+  - include-markdown
